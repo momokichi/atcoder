@@ -27,6 +27,20 @@ vector<ll> divisors(ll n) {
   return a;
 }
 
+vector<ll> memo(100, -1);
+
+ll lucas(int n) {
+  if (n == 0) return 2;
+  if (n == 1) return 1;
+
+  if (memo[n] != -1) return memo[n];
+
+  return memo[n] = lucas(n - 1) + lucas(n - 2);
+}
+
 int main() {
+  int n;
+  cin >> n;
+  cout << lucas(n) << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

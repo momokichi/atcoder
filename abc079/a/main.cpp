@@ -28,5 +28,11 @@ vector<ll> divisors(ll n) {
 }
 
 int main() {
+  string n;
+  cin >> n;
+  if ((n[0] == n[1] && n[1] == n[2]) || (n[1] == n[2] && n[2] == n[3]))
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

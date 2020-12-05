@@ -28,5 +28,8 @@ vector<ll> divisors(ll n) {
 }
 
 int main() {
+  int n;
+  cin >> n;
+  rep(i, n) { cin >> }
   // cout << fixed << setprecision(9) <<  << endl;
 }

@@ -28,5 +28,18 @@ vector<ll> divisors(ll n) {
 }
 
 int main() {
+  int n;
+  cin >> n;
+  vector<int> m(n);
+  rep(i, n) cin >> m[i];
+  int ans = 0;
+
+  rep(i, n) {
+    if (m[i] < 80) {
+      ans += (80 - m[i]);
+    }
+  }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

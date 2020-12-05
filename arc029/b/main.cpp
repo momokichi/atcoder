@@ -28,5 +28,20 @@ vector<ll> divisors(ll n) {
 }
 
 int main() {
+  int a, b;
+  cin >> a >> b;
+  int n;
+  cin >> n;
+  rep(i, n) {
+    int c, d;
+    cin >> c >> d;
+    bool x = (a <= c) && (b <= d);
+    bool y = (a <= d) && (b <= c);
+    bool z = (c * c + d * d >= a * a + b * b);
+    if (x || y || z)
+      cout << "YES" << endl;
+    else
+      cout << "NO" << endl;
+  }
   // cout << fixed << setprecision(9) <<  << endl;
 }

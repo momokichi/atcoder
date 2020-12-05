@@ -28,5 +28,23 @@ vector<ll> divisors(ll n) {
 }
 
 int main() {
+  int n;
+  cin >> n;
+  vector<int> t(n);
+  rep(i, n) cin >> t[i];
+  int sum = accumulate(t.begin(), t.end(), 0);
+
+  int ans = 999999;
+  for (int bit = 0; bit < (1 << n); ++bit) {
+    int a = 0;
+    for (int i = 0; i < n; ++i) {
+      if (bit & (1 << i)) {
+        a += t[i];
+      }
+    }
+    int tmp = max(a, sum - a);
+    ans = min(ans, tmp);
+  }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

@@ -28,5 +28,13 @@ vector<ll> divisors(ll n) {
 }
 
 int main() {
+  string s;
+  cin >> s;
+  int ans = 0;
+  int len = s.length() - 1;
+  for (int i = 0; i <= len / 2; ++i) {
+    if (s[i] != s[len - i]) ans++;
+  }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

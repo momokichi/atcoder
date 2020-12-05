@@ -6,6 +6,10 @@ using namespace std;
 typedef long long int ll;
 const double PI = acos(-1);
 
+using Graph = vector<vector<int>>;
+vector<int> visited(false);
+vector<int> used(false);
+
 int gcd(int a, int b) {
   if (a % b == 0)
     return b;
@@ -27,6 +31,38 @@ vector<ll> divisors(ll n) {
   return a;
 }
 
+bool loop;
+
+void dfs(const Graph &G, int v) {
+  visited[v] = true;
+  for (auto next : G[v]) {
+    if (visited[next]) {
+      loop = true;
+      continue;
+    };
+    dfs(G, next);
+  }
+}
+
 int main() {
+  int n, m;
+  cin >> n >> m;
+  Graph g(n);
+  rep(i, m) {
+    int u, v;
+    cin >> u >> v;
+    g[u - 1].push_back(v - 1);
+  }
+
+  int ans = 0;
+  visited.assign(n, false);
+
+  rep(v, n) {
+    loop = false;
+    if (visited[v]) continue;
+    dfs(g, v);
+    if (!loop) ans++;
+  }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }
