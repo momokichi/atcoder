@@ -65,11 +65,26 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
-    cout << yes << endl;
-  else
-    cout << no << endl;
-  // cout << fixed << setprecision(9) <<  << endl;
+  ll n, k;
+  cin >> n >> k;
+  vector<ld> p(n);
+  vector<ld> a(n);
+
+  rep(i, n) {
+    cin >> p[i];
+    ld sum = p[i] * (p[i] + 1) / 2;
+    a[i] = sum / p[i];
+  }
+
+  ld ans = 0;
+
+  vector<ld> s(n + 1, 0);
+  for (int i = 0; i < n; ++i) s[i + 1] = s[i] + a[i];
+
+  for (int i = 0; i < n - k + 1; ++i) {
+    ld tmp = s[i + k] - s[i];
+    ans = max(ans, tmp);
+  }
+
+  cout << fixed << setprecision(12) << ans << endl;
 }

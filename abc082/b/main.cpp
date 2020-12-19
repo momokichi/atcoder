@@ -4,8 +4,6 @@ using namespace std;
 #define _GLIBCXX_DEBUG
 #define INF 1e8
 typedef long long int ll;
-typedef long double ld;
-
 const double PI = acos(-1);
 #define yes "Yes"
 #define no "No"
@@ -31,10 +29,8 @@ bool isPrime(ll n) {
   return true;
 }
 
-// 最大公約数
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 
-// 最小公倍数
 ll lcm(ll a, ll b) { return abs(a) / gcd(a, b) * abs(b); }
 
 ll gcd2(const vector<ll> &v) {
@@ -65,9 +61,11 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
+  string s, t;
+  cin >> s >> t;
+  sort(s.begin(), s.end());
+  sort(t.begin(), t.end(), greater<int>());
+  if (s < t)
     cout << yes << endl;
   else
     cout << no << endl;

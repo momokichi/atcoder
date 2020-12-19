@@ -65,11 +65,19 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
-    cout << yes << endl;
-  else
-    cout << no << endl;
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, n) cin >> a[i];
+  int ans = INF;
+  for (int y = -100; y <= 100; ++y) {
+    int cost = 0;
+    for (int i = 0; i < n; ++i) {
+      cost += (a[i] - y) * (a[i] - y);
+    }
+    ans = min(ans, cost);
+  }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

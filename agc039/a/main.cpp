@@ -65,11 +65,20 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
-    cout << yes << endl;
-  else
-    cout << no << endl;
+  string s;
+  ll k;
+  cin >> s >> k;
+  string tmp = s;
+  sort(tmp.begin(), tmp.end());
+
+  if (tmp[0] == tmp[tmp.length() - 1]) {
+    cout << (s.length() * k + 2 - 1 / 2) << endl;
+    return 0;
+  }
+
+  if (s[0] == s[s.length() - 1]) {
+    } else {
+    cout << k * (s.length() + 2 - 1 / 2) << endl;
+  }
   // cout << fixed << setprecision(9) <<  << endl;
 }

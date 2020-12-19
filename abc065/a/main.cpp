@@ -65,11 +65,15 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
-    cout << yes << endl;
-  else
-    cout << no << endl;
+  ll x, a, b;
+  cin >> x >> a >> b;
+
+  if (a - b >= 0) {
+    cout << "delicious" << endl;
+  } else if (a + x - b >= 0) {
+    cout << "safe" << endl;
+  } else {
+    cout << "dangerous" << endl;
+  }
   // cout << fixed << setprecision(9) <<  << endl;
 }

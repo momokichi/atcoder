@@ -65,11 +65,48 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
-    cout << yes << endl;
-  else
-    cout << no << endl;
+  ll n, m;
+  cin >> n >> m;
+
+  if (n == m) {
+    cout << 0 << endl;
+    return 0;
+  }
+
+  if (m == 0) {
+    cout << 1 << endl;
+    return 0;
+  }
+
+  vector<ll> a(m);
+  rep(i, m) { cin >> a[i]; }
+  sort(a.begin(), a.end());
+
+  // 番兵追加
+  a.insert(a.begin(), 0);
+  a.push_back(n + 1);
+
+  ll width = n;
+  vector<ll> v;  // 白色区間の長さを入れる
+
+  rep(i, m + 1) {
+    ll len = a[i + 1] - a[i] - 1;
+    if (len > 0) {
+      width = min(width, a[i + 1] - a[i] - 1);
+      v.push_back(len);
+    }
+  }
+  // cout << "width " << width << endl;
+
+  ll ans = 0;
+  ll prev = 1;
+
+  for (auto len : v) {
+    // ans += ((len + width - 1) / width);
+    ans += ceil((ld)len / (ld)width);
+  }
+
+  cout << ans << endl;
+
   // cout << fixed << setprecision(9) <<  << endl;
 }

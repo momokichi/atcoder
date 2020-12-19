@@ -65,11 +65,29 @@ vector<ll> divisors(ll n) {
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
 int main() {
-  int x;
-  cin >> x;
-  if (x >= 30)
-    cout << yes << endl;
-  else
-    cout << no << endl;
+  int n;
+  cin >> n;
+  vector<bool> visited(n, false);
+  vector<int> a(n);
+  rep(i, n) {
+    cin >> a[i];
+    a[i]--;
+  }
+
+  int current = 0;
+  int ans = 0;
+  while (!visited[current]) {
+    // cout << current << endl;
+    if (current == 1) {
+      cout << ans << endl;
+      return 0;
+    }
+    visited[current] = true;
+    current = a[current];
+    ans++;
+  }
+
+  cout << -1 << endl;
+
   // cout << fixed << setprecision(9) <<  << endl;
 }
