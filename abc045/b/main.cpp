@@ -2,13 +2,15 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define _GLIBCXX_DEBUG
-#define INF 1e8
 typedef long long int ll;
 typedef long double ld;
 
+const int inf = 1e8;
+const ll llinf = 1e18;
 const double PI = acos(-1);
 #define yes "Yes"
 #define no "No"
+#define all(n) n.begin(), n.end()
 
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
@@ -64,19 +66,52 @@ vector<ll> divisors(ll n) {
 // pairを要素に持つvectorをsecondを基準にソートする比較関数
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
-int main() {
-  vector<vector<int>> c(3, vector<int>(3));
-  rep(i, 3) { rep(j, 3) cin >> c[i][j]; }
-  int a = c[0][0];
-  rep(k, a) {
-    rep(i, 3) {
-      rep(j, 3) { if () }
-      if () {
-        cout << yes << endl;
-        return 0;
+vector<int> eratosthenes(int n) {
+  vector<bool> is_prime(n + 1, true);
+  vector<int> p;
+  for (int i = 2; i <= n; ++i) {
+    if (is_prime[i]) {
+      for (int j = i * 2; j <= n; j += i) {
+        is_prime[j] = false;
       }
+      p.push_back(i);
     }
   }
-  cout << no << endl;
-  // cout << fixed << setprecision(9) <<  << endl;
+  return p;
+}
+
+int main() {
+  vector<string> s(3);
+  cin >> s[0] >> s[1] >> s[2];
+
+  int turn = 0;
+  vector<int> index(3, 0);
+
+  while (true) {
+    if (index[0] == s[0].length() + 1) {
+      cout << "A" << endl;
+      return 0;
+    } else if (index[1] == s[1].length() + 1) {
+      cout << "B" << endl;
+      return 0;
+    } else if (index[2] == s[2].length() + 1) {
+      cout << "C" << endl;
+      return 0;
+    }
+
+    // cout << turn << endl;
+    int t = turn;
+
+    char c = s[turn][index[turn]];
+    if (c == 'a')
+      turn = 0;
+    else if (c == 'b')
+      turn = 1;
+    else
+      turn = 2;
+
+    index[t]++;
+  }
+
+  // cout << fixed << setprecision(9) << ans << endl;
 }

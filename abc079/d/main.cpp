@@ -27,6 +27,36 @@ vector<ll> divisors(ll n) {
   return a;
 }
 
+void warshall_floyd(int n, vector<vector<int>> d) {
+  rep(k, n) {
+    rep(i, n) {
+      rep(j, n) { d[i][j] = min(d[i][j], d[i][k] + d[k][j]); }
+    }
+  }
+}
+
 int main() {
-  // cout << fixed << setprecision(9) <<  << endl;
+  int h, w;
+  cin >> h >> w;
+  int n = 10;
+  vector<vector<int>> v(n, vector<int>(n, 0));
+  rep(i, n) rep(j, n) cin >> v[i][j];
+
+  rep(k, n) {
+    rep(i, n) {
+      rep(j, n) { v[i][j] = min(v[i][j], v[i][k] + v[k][j]); }
+    }
+  }
+
+  ll ans = 0;
+  rep(i, h) {
+    rep(j, w) {
+      int a;
+      cin >> a;
+      if (a == -1) continue;
+      ans += v[a][1];
+    }
+  }
+  cout << ans << endl;
+  // cout << fixed << setprecision(9) << ans << endl;
 }

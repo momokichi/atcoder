@@ -2,13 +2,15 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define _GLIBCXX_DEBUG
-#define INF 1e8
 typedef long long int ll;
 typedef long double ld;
 
+const int inf = 1e8;
+const ll llinf = 1e18;
 const double PI = acos(-1);
 #define yes "Yes"
 #define no "No"
+#define all(n) n.begin(), n.end()
 
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
@@ -64,19 +66,33 @@ vector<ll> divisors(ll n) {
 // pairを要素に持つvectorをsecondを基準にソートする比較関数
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
-int main() {
-  vector<vector<int>> c(3, vector<int>(3));
-  rep(i, 3) { rep(j, 3) cin >> c[i][j]; }
-  int a = c[0][0];
-  rep(k, a) {
-    rep(i, 3) {
-      rep(j, 3) { if () }
-      if () {
-        cout << yes << endl;
-        return 0;
+vector<int> eratosthenes(int n) {
+  vector<bool> is_prime(n + 1, true);
+  vector<int> p;
+  for (int i = 2; i <= n; ++i) {
+    if (is_prime[i]) {
+      for (int j = i * 2; j <= n; j += i) {
+        is_prime[j] = false;
       }
+      p.push_back(i);
     }
   }
-  cout << no << endl;
-  // cout << fixed << setprecision(9) <<  << endl;
+  return p;
+}
+
+int main() {
+  int n;
+  cin >> n;
+  vector<ll> a(n);
+  rep(i, n) cin >> a[i];
+
+  vector<ll> b(n);
+  rep(i, n) { b[i] = a[i] - i; }
+  sort(all(b));
+  ld med = b[n / 2];
+  ll ans = 0;
+
+  rep(i, n) { ans += abs(a[i] - (med + i)); }
+  cout << ans << endl;
+  // cout << fixed << setprecision(9) << ans << endl;
 }

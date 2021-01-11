@@ -2,13 +2,15 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define _GLIBCXX_DEBUG
-#define INF 1e8
 typedef long long int ll;
 typedef long double ld;
 
+const int inf = 1e8;
+const ll llinf = 1e18;
 const double PI = acos(-1);
 #define yes "Yes"
 #define no "No"
+#define all(n) n.begin(), n.end()
 
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
@@ -64,19 +66,34 @@ vector<ll> divisors(ll n) {
 // pairを要素に持つvectorをsecondを基準にソートする比較関数
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
-int main() {
-  vector<vector<int>> c(3, vector<int>(3));
-  rep(i, 3) { rep(j, 3) cin >> c[i][j]; }
-  int a = c[0][0];
-  rep(k, a) {
-    rep(i, 3) {
-      rep(j, 3) { if () }
-      if () {
-        cout << yes << endl;
-        return 0;
+vector<int> eratosthenes(int n) {
+  vector<bool> is_prime(n + 1, true);
+  vector<int> p;
+  for (int i = 2; i <= n; ++i) {
+    if (is_prime[i]) {
+      for (int j = i * 2; j <= n; j += i) {
+        is_prime[j] = false;
       }
+      p.push_back(i);
     }
   }
-  cout << no << endl;
-  // cout << fixed << setprecision(9) <<  << endl;
+  return p;
+}
+
+ll modPow(ll n, ll k, ll mod) {
+  ll res = 1;
+  while (k > 0) {
+    if ((k & 1) == 1) res = (res * n) % mod;
+    n = (n * n) % mod;
+    k >>= 1;
+  }
+  return res;
+}
+
+int main() {
+  ll n, m;
+  cin >> n >> m;
+  ll k = modPow(10, n, m * m);
+  cout << k / m % m << endl;
+  // cout << fixed << setprecision(9) << ans << endl;
 }

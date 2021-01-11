@@ -47,20 +47,25 @@ bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 int main() {
   int n;
   cin >> n;
-  vector<int> a(n);
-  rep(i, n) cin >> a[i];
-  ll ans = 0;
-  for (int i = 0; i < n - 1; ++i) {
-    int b1 = -a[i];
-    int b2 = -a[i + 1];
-    if (a[i] + a[i + 1] < b1 + b2) {
-      a[i] = b1;
-      a[i + 1] = b2;
-    }
-    ans += a[i];
-    cout << ans << endl;
+  vector<ll> a(n);
+  int c = 0;
+  bool flag = false;
+  ll sum = 0;
+
+  rep(i, n) {
+    cin >> a[i];
+    sum += abs(a[i]);
+    if (a[i] < 0) c++;
+    if (a[i] == 0) flag = true;
   }
-  ans += a[n - 1];
-  cout << ans << endl;
+
+  if (c % 2 == 0 || flag) {
+    cout << sum << endl;
+  } else {
+    ll minimum = 1e9;
+    rep(i, n) minimum = min(minimum, abs(a[i]));
+    cout << sum - (2 * minimum) << endl;
+  }
+
   // cout << fixed << setprecision(9) <<  << endl;
 }
