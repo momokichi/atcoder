@@ -2,10 +2,11 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define _GLIBCXX_DEBUG
-#define INF 1e8
 typedef long long int ll;
 typedef long double ld;
 
+const int inf = 1e8;
+const ll llinf = 1e18;
 const double PI = acos(-1);
 #define yes "Yes"
 #define no "No"
@@ -16,6 +17,8 @@ vector<int> visited(false);
 
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
+// const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+// const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
 
 void dfs(const Graph &G, int v) {
   visited[v] = true;
@@ -80,14 +83,5 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  ll n, a, b;
-  cin >> n >> a >> b;
-  vector<ll> x(n);
-  rep(i, n) cin >> x[i];
-  ll ans = 0;
-
-  rep(i, n - 1) { ans += min(b, (x[i + 1] - x[i]) * a); }
-
-  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }
