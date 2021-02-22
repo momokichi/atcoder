@@ -83,9 +83,28 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, n) cin >> a[i];
+  ll ans = 0;
+
+  for (int i = 0; i < n; ++i) {
+    int height = a[i];
+    int count = 0;
+    for (int j = 0; j < n; j++) {
+      if (height <= a[j]) count++;
+
+      if (height > a[j]) {
+        // cout << i << " " << j << " " << height * count << endl;
+        ans = max(ans, (ll)height * count);
+        count = 0;
+      }
+    }
+    // cout << i << " " << height * count << endl;
+
+    ans = max(ans, (ll)height * count);
   }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

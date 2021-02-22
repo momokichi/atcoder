@@ -83,9 +83,26 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
+  string s;
+  cin >> s;
+  bool flag = true;
+  rep(i, s.length()) {
+    if (i % 2 == 0) {
+      if (!islower(s[i])) {
+        flag = false;
+        break;
+      }
+    } else {
+      if (!isupper(s[i])) {
+        flag = false;
+        break;
+      }
+    }
   }
+
+  if (flag)
+    cout << yes << endl;
+  else
+    cout << no << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

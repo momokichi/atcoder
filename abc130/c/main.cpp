@@ -83,9 +83,11 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
-  }
-  // cout << fixed << setprecision(9) << ans << endl;
+  ld w, h, x, y;
+  cin >> w >> h >> x >> y;
+  bool is_multiple = (2 * x == w && 2 * y == h);
+
+  ld area = w * h / 2;
+
+  cout << fixed << setprecision(10) << area << " " << is_multiple << endl;
 }

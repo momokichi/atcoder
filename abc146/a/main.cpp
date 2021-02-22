@@ -83,9 +83,11 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
-  }
+  string str;
+  cin >> str;
+  vector<string> v = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
+  auto itr = find(all(v), str);
+  int index = distance(v.begin(), itr);
+  cout << 7 - index << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

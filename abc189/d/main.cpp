@@ -83,9 +83,19 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
+  int n;
+  vector<string> s(n);
+  rep(i, n) cin >> s[i];
+  reverse(all(s));
+  ll ans = 0;
+  rep(i, n) {
+    if (s[i] == "OR") {
+      ans += pow(2, n - i + 1);
+    } else if (s[i] == "AND") {
+      continue;
+    }
   }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

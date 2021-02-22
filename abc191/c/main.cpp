@@ -13,7 +13,7 @@ const double PI = acos(-1);
 #define all(n) n.begin(), n.end()
 
 using Graph = vector<vector<int>>;
-vector<int> visited(false);
+vector<bool> visited(false), finished(false);
 
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
@@ -82,10 +82,49 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
+bool check(vector<string> s, int i, int j) {
+  if (s[i - 1][j] == '.' && s[i - 1][j - 1] == '.' && s[i][j - 1] == '.')
+    return true;
+
+  if (s[i - 1][j] == '.' && s[i - 1][j + 1] == '.' && s[i][j + 1] == '.')
+    return true;
+
+  if (s[i + 1][j] == '.' && s[i + 1][j + 1] == '.' && s[i][j + 1] == '.')
+    return true;
+
+  if (s[i + 1][j] == '.' && s[i + 1][j - 1] == '.' && s[i][j - 1] == '.')
+    return true;
+
+  if (s[i + 1][j + 1] == '.' && s[i + 1][j] == '#' && s[i][j + 1] == '#')
+    return true;
+
+  if (s[i + 1][j - 1] == '.' && s[i + 1][j] == '#' && s[i][j - 1] == '#')
+    return true;
+
+  if (s[i - 1][j - 1] == '.' && s[i - 1][j] == '#' && s[i][j - 1] == '#')
+    return true;
+
+  if (s[i - 1][j + 1] == '.' && s[i - 1][j] == '#' && s[i][j + 1] == '#')
+    return true;
+
+  return false;
+}
+
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
+  int h, w;
+  cin >> h >> w;
+  vector<string> s(h);
+  rep(i, h) cin >> s[i];
+
+  int ans = 0;
+  rep(i, h) {
+    rep(j, w) {
+      if (s[i][j] == '.') continue;
+
+      if (check(s, i, j)) ans++;
+    }
   }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

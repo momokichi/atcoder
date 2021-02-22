@@ -82,10 +82,28 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
+ll g1(ll x) {
+  string s = to_string(x);
+  sort(all(s), greater<ll>());
+  ll ret = stoi(s);
+  return ret;
+}
+ll g2(ll x) {
+  string s = to_string(x);
+  sort(all(s));
+  ll ret = stoi(s);
+  return ret;
+}
+
+ll f(ll x) { return g1(x) - g2(x); }
+
 int main() {
-  int n, k;
+  ll n, k;
   cin >> n >> k;
-  if (k % 2 == 0) {
+  for (int i = 1; i <= k; ++i) {
+    ll a = f(n);
+    n = a;
   }
+  cout << n << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

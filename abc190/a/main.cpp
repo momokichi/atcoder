@@ -83,9 +83,18 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
+  int a, b, c;
+  cin >> a >> b >> c;
+  if (a > b) {
+    cout << "Takahashi" << endl;
+  } else if (a < b) {
+    cout << "Aoki" << endl;
+  } else {
+    if (c == 0) {
+      cout << "Aoki" << endl;
+    } else {
+      cout << "Takahashi" << endl;
+    }
   }
   // cout << fixed << setprecision(9) << ans << endl;
 }

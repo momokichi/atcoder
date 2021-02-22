@@ -83,9 +83,35 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
+  int n, m;
+  cin >> n >> m;
+  vector<pair<ll, ll>> dish(m);
+  rep(i, m) cin >> dish[i].first >> dish[i].second;
+  int k;
+  cin >> k;
+  vector<pair<ll, ll>> people(k);
+  rep(i, k) cin >> people[i].first >> people[i].second;
+
+  int ans = 0;
+  for (int bit = 0; bit < (1 << k); ++bit) {
+    vector<bool> a(m, false);
+    int tmp = 0;
+    for (int i = 0; i < k; ++i) {
+      if (bit & (1 << i)) {
+        a[people[i].first - 1] = true;
+      } else {
+        a[people[i].second - 1] = true;
+      }
+    }
+    // rep(i, m) cout << a[i] << " ";
+    // cout << endl;
+    rep(i, m) {
+      if (a[dish[i].first - 1] && a[dish[i].second - 1]) {
+        tmp++;
+      }
+    }
+    ans = max(ans, tmp);
   }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

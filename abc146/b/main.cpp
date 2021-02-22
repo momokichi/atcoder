@@ -82,10 +82,17 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
+char convert(char c, int n) {
+  c = c + n;
+  if (c > 90) c -= 26;
+  return c;
+}
+
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
-  }
+  int n;
+  string s;
+  cin >> n >> s;
+  rep(i, s.length()) { s[i] = convert(s[i], n); }
+  cout << s << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

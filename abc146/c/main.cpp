@@ -83,9 +83,8 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  if (k % 2 == 0) {
-  }
+  ll a, b, x;
+  cin >> a >> b >> x;
+
   // cout << fixed << setprecision(9) << ans << endl;
 }
