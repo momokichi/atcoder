@@ -60,9 +60,21 @@ vector<ll> divisors(ll n) {
 // pairを要素に持つvectorをsecondを基準にソートする比較関数
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
+ll n;
+
+void f(ll a, int used, ll &count) {
+  if (a > n) return;
+  if (used == 0b111) count++;
+
+  f(a * 10 + 7, used | 0b001, count);
+  f(a * 10 + 5, used | 0b010, count);
+  f(a * 10 + 3, used | 0b100, count);
+}
+
 int main() {
-  ll n;
-  cin>>n;
-  
+  cin >> n;
+  ll ans = 0;
+  f(0, 0, ans);
+  cout << ans << endl;
   // cout << fixed << setprecision(9) <<  << endl;
 }

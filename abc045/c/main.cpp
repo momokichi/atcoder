@@ -83,6 +83,24 @@ vector<int> eratosthenes(int n) {
 int main() {
   string s;
   cin >> s;
+  ll ans = 0;
 
+  int n = s.length() - 1;
+
+  for (int bit = 0; bit < (1 << n); ++bit) {
+    ll a = 0;
+    for (int i = 0; i < n; ++i) {
+      a *= 10;
+      a += s[i] - '0';
+      if (bit & (1 << i)) {
+        ans += a;
+        a = 0;
+      }
+    }
+    a *= 10;
+    a += s.back() - '0';
+    ans += a;
+  }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

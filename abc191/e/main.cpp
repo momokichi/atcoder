@@ -82,17 +82,6 @@ void dijkstra(const Graph &g, int s, vector<ll> &dis, vector<int> &prev) {
   }
 }
 
-vector<int> h(const vector<int> &pre, int t) {
-  vector<int> path;
-  for (int curr = t; curr != -1; curr = pre[curr]) {
-    path.push_back(curr);
-  }
-  reverse(all(path));
-  return path;
-}
-
-vector<int> min_cycle;
-
 void f(Graph &g) {
   int V = (int)g.size();
   rep(v, V) {
@@ -105,7 +94,6 @@ void f(Graph &g) {
       dijkstra(g, e.first, dist, pre);
       if (ans > dist[v] + e.second) {
         ans = dist[v] + e.second;
-        min_cycle = h(pre, v);
       }
       g[v].insert((g[v].begin() + i), e);
     }
