@@ -111,5 +111,20 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int n;
+  cin >> n;
+  vector<ll> a(n), b(n);
+  rep(i, n) cin >> a[i] >> b[i];
+
+  ll mintime = llinf;
+  rep(i, n) {
+    rep(j, n) {
+      if (i == j)
+        mintime = min(mintime, a[i] + b[j]);
+      else
+        mintime = min(mintime, max(a[i], b[j]));
+    }
+  }
+  cout << mintime << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

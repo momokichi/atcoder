@@ -12,41 +12,11 @@ const double PI = acos(-1);
 #define no "No"
 #define all(n) n.begin(), n.end()
 
-template <class T>
-void chmin(T &a, T b) {
-  if (a > b) a = b;
-}
-template <class T>
-void chmax(T &a, T b) {
-  if (a < b) a = b;
-}
-
-struct UnionFind {
-  vector<int> par, siz;
-  UnionFind(int n) : par(n, -1), siz(n, 1) {}
-  int root(int x) {
-    if (par[x] == -1) return x;
-    return par[x] = root(par[x]);
-  }
-  bool isSame(int x, int y) { return root(x) == root(y); }
-  bool unite(int x, int y) {
-    x = root(x), y = root(y);
-    if (x == y) return false;
-    if (siz[x] < siz[y]) swap(x, y);
-    par[y] = x;
-    siz[x] += siz[y];
-    return true;
-  }
-  int size(int x) { return siz[root(x)]; }
-};
-
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
 
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
-// const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
-// const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
 
 void dfs(const Graph &G, int v) {
   visited[v] = true;
@@ -111,5 +81,37 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int h, w;
+  cin >> h >> w;
+  string a = "";
+  rep(i, w + 2) a.push_back('.');
+  vector<string> s(h + 2, a);
+
+  for (int i = 1; i < h + 1; ++i) {
+    string b;
+    cin >> b;
+    b = '.' + b + '.';
+    s[i] = b;
+  }
+
+  const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+  const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+
+  for (int i = 1; i < h + 1; ++i) {
+    for (int j = 1; j < w + 1; ++j) {
+      if (s[i][j] == '#') continue;
+      int count = 0;
+      for (int direction = 0; direction < 8; ++direction) {
+        if (s[i + dx[direction]][j + dy[direction]] == '#') ++count;
+      }
+      s[i][j] = count + '0';
+    }
+  }
+
+  for (int i = 1; i < h + 1; ++i) {
+    for (int j = 1; j < w + 1; ++j) cout << s[i][j];
+    cout << endl;
+  }
+
   // cout << fixed << setprecision(9) << ans << endl;
 }

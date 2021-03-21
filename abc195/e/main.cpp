@@ -111,5 +111,21 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int n;
+  string s, x;
+  cin >> n >> s >> x;
+  string t = "";
+
+  rep(i, n) {
+    if (x[i] == 'A') {
+    } else if (x[i] == 'T') {
+    }
+  }
+
+  if (stoi(t) % 7 == 0)
+    cout << "Takahashi" << endl;
+  else
+    cout << "Aoki" << endl;
+
   // cout << fixed << setprecision(9) << ans << endl;
 }

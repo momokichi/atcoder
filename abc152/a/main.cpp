@@ -111,5 +111,11 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int n, m;
+  cin >> n >> m;
+  if (n == m)
+    cout << yes << endl;
+  else
+    cout << no << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

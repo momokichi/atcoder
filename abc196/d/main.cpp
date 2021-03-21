@@ -111,5 +111,10 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int h, w, a, b;
+  cin >> h >> w >> a >> b;
+  int ans = 0;
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

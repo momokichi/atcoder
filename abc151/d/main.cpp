@@ -111,5 +111,55 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int h, w;
+  cin >> h >> w;
+  vector<string> s(h);
+  for (int i = 0; i < h; ++i) {
+    cin >> s[i];
+  }
+
+  // rep(i, h) { cout << s[i] << endl; }
+
+  int ans = 0;
+
+  for (int startx = 0; startx < h; ++startx) {
+    for (int starty = 0; starty < w; ++starty) {
+      for (int goalx = 0; goalx < h; ++goalx) {
+        for (int goaly = 0; goaly < w; ++goaly) {
+          if (s[startx][starty] == '#' || s[goalx][goaly] == '#') continue;
+
+          vector<vector<int>> dist(h, vector<int>(w, -1));
+          dist[startx][starty] = 0;
+          queue<pair<int, int>> que;
+          que.push({startx, starty});
+          while (!que.empty()) {
+            pair<int, int> current = que.front();
+            que.pop();
+
+            int x = current.first;
+            int y = current.second;
+
+            for (int direction = 0; direction < 4; ++direction) {
+              int next_x = x + dx[direction];
+              int next_y = y + dy[direction];
+              if (next_x < 0 || next_x >= h || next_y < 0 || next_y >= w)
+                continue;  // 迷路から飛び出さない
+              if (s[next_x][next_y] == '#') continue;  // 壁はスルー
+
+              if (dist[next_x][next_y] == -1) {
+                que.push(make_pair(next_x, next_y));
+                dist[next_x][next_y] = dist[x][y] + 1;
+              }
+            }
+          }
+          // if (startx == 0 || starty == 0) cout << dist[goalx][goaly] << endl;
+          // if (dist[goalx][goaly] == 39)
+          //   printf("%d %d %d %d\n", startx, starty, goalx, goaly);
+          ans = max(ans, dist[goalx][goaly]);
+        }
+      }
+    }
+  }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

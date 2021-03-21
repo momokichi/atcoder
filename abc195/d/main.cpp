@@ -94,7 +94,7 @@ vector<ll> divisors(ll n) {
 }
 
 // pairを要素に持つvectorをsecondを基準にソートする比較関数
-bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
+bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second > b.second; }
 
 vector<int> eratosthenes(int n) {
   vector<bool> is_prime(n + 1, true);
@@ -111,5 +111,31 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int n, m, q;
+  cin >> n >> m >> q;
+  vector<pair<int, int>> parcel(n);
+  vector<int> box(m);
+  rep(i, n) cin >> parcel[i].first >> parcel[i].second;
+  rep(i, m) cin >> box[i];
+
+  sort(all(parcel), comp);
+
+  while (q--) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    ll ans = 0;
+    vector<int> b = box;
+    b.erase(b.begin() + l, b.begin() + r + 1);
+    sort(all(b));
+
+    for (int i = 0; i < n; ++i) {
+      auto it = lower_bound(all(b), parcel[i].first);
+      if (it == b.end()) continue;
+      ans += parcel[i].second;
+      b.erase(it, it + 1);
+    }
+    cout << ans << endl;
+  }
   // cout << fixed << setprecision(9) << ans << endl;
 }

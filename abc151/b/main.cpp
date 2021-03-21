@@ -111,5 +111,17 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int n, k, m;
+  cin >> n >> k >> m;
+  vector<int> a(n - 1);
+  rep(i, n - 1) cin >> a[i];
+  int sum = 0;
+  rep(i, n - 1) sum += a[i];
+
+  int p = m * n;
+  if (p - sum > k)
+    cout << -1 << endl;
+  else
+    cout << max(p - sum, 0) << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

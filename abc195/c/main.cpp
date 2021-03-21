@@ -111,5 +111,34 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  ll n;
+  cin >> n;
+  ll ans = 0;
+
+  if (n < 1e3)
+    ans = 0;
+  else if (n < 1e6) {
+    ans += n - 1000 + 1;
+  } else if (n < 1e9) {
+    ans += 999999 - 1000 + 1;
+    ans += (n - 1e6 + 1) * 2;
+  } else if (n < 1e12) {
+    ans += 999999 - 1e3 + 1;
+    ans += (999999999 - 1e6 + 1) * 2;
+    ans += (n - 1e9 + 1) * 3;
+  } else if (n < 1e15) {
+    ans += 999999 - 1e3 + 1;
+    ans += (999999999 - 1e6 + 1) * 2;
+    ans += (999999999999 - 1e9 + 1) * 3;
+    ans += (n - 1e12 + 1) * 4;
+  } else {
+    ans += 999999 - 1e3 + 1;
+    ans += (999999999 - 1e6 + 1) * 2;
+    ans += (999999999999 - 1e9 + 1) * 3;
+    ans += (999999999999999 - 1e12 + 1) * 4;
+    ans += 5;
+  }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

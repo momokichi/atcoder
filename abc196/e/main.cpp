@@ -110,6 +110,28 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
+ll f(ll x, ll a, ll t) {
+  if (t == 1) {
+    return x + a;
+  } else if (t == 2) {
+    return max(x, a);
+  } else if (t == 3) {
+    return min(x, a);
+  }
+}
+
 int main() {
+  ll n;
+  cin >> n;
+  vector<ll> a(n), t(n);
+  rep(i, n) cin >> a[i] >> t[i];
+  ll q;
+  cin >> q;
+  while (q--) {
+    ll x;
+    cin >> x;
+    rep(i, n) { x = f(x, a[i], t[i]); }
+    cout << x << endl;
+  }
   // cout << fixed << setprecision(9) << ans << endl;
 }

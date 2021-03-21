@@ -111,5 +111,14 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  ll n;
+  cin >> n;
+  ll ans = 0;
+  for (ll i = 1; i * i <= n + 10; ++i) {
+    if (stoll(to_string(i) + to_string(i)) > n) break;
+    ans++;
+  }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

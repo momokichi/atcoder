@@ -12,6 +12,25 @@ const double PI = acos(-1);
 #define no "No"
 #define all(n) n.begin(), n.end()
 
+struct UnionFind {
+  vector<int> par, siz;
+  UnionFind(int n) : par(n, -1), siz(n, 1) {}
+  int root(int x) {
+    if (par[x] == -1) return x;
+    return par[x] = root(par[x]);
+  }
+  bool isSame(int x, int y) { return root(x) == root(y); }
+  bool unite(int x, int y) {
+    x = root(x), y = root(y);
+    if (x == y) return false;
+    if (siz[x] < siz[y]) swap(x, y);
+    par[y] = x;
+    siz[x] += siz[y];
+    return true;
+  }
+  int size(int x) { return siz[root(x)]; }
+};
+
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
 
@@ -81,5 +100,28 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  ll n, m;
+  cin >> n >> m;
+  vector<pair<ll, ll>> e(m);
+  rep(i, m) {
+    cin >> e[i].first >> e[i].second;
+    e[i].first--, e[i].second--;
+  }
+  reverse(all(e));
+
+  vector<ll> ans;
+  ll cur = n * (n - 1) / 2;
+  UnionFind uf(n);
+
+  rep(i, m) {
+    ans.push_back(cur);
+    if (uf.isSame(e[i].first, e[i].second)) continue;
+
+    cur -= uf.size(e[i].first) * uf.size(e[i].second);
+    uf.unite(e[i].first, e[i].second);
+  }
+
+  reverse(all(ans));
+  rep(i, m) cout << ans[i] << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

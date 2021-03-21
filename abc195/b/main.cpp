@@ -111,5 +111,24 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int a, b, w;
+  cin >> a >> b >> w;
+  w *= 1000;
+
+  int minimum = inf;
+  int maximum = 0;
+
+  for (int i = 1; i < 1e7 + 100; ++i) {
+    double weight = (double)w / (double)i;
+    if (weight >= a && weight <= b) {
+      minimum = min(minimum, i);
+      maximum = max(maximum, i);
+    }
+  }
+
+  if (minimum == inf && maximum == 0)
+    cout << "UNSATISFIABLE" << endl;
+  else
+    cout << minimum << " " << maximum << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

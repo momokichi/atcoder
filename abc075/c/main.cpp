@@ -12,11 +12,41 @@ const double PI = acos(-1);
 #define no "No"
 #define all(n) n.begin(), n.end()
 
+template <class T>
+void chmin(T &a, T b) {
+  if (a > b) a = b;
+}
+template <class T>
+void chmax(T &a, T b) {
+  if (a < b) a = b;
+}
+
+struct UnionFind {
+  vector<int> par, siz;
+  UnionFind(int n) : par(n, -1), siz(n, 1) {}
+  int root(int x) {
+    if (par[x] == -1) return x;
+    return par[x] = root(par[x]);
+  }
+  bool isSame(int x, int y) { return root(x) == root(y); }
+  bool unite(int x, int y) {
+    x = root(x), y = root(y);
+    if (x == y) return false;
+    if (siz[x] < siz[y]) swap(x, y);
+    par[y] = x;
+    siz[x] += siz[y];
+    return true;
+  }
+  int size(int x) { return siz[root(x)]; }
+};
+
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
 
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
+// const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+// const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
 
 void dfs(const Graph &G, int v) {
   visited[v] = true;
@@ -83,31 +113,23 @@ vector<int> eratosthenes(int n) {
 int main() {
   int n, m;
   cin >> n >> m;
-  vector<pair<int, int>> path(m);
+  vector<pair<int, int>> e(m);
   rep(i, m) {
-    int a, b;
-    cin >> a >> b;
-    a--, b--;
-    path[i].first = a, path[i].second = b;
+    cin >> e[i].first >> e[i].second;
+    e[i].first--, e[i].second--;
   }
 
   int ans = 0;
 
-  for (int i = 0; i < m; i++) {
-    Graph g(n);
-    for (int j = 0; j < m; j++) {
-      if (j == i) continue;
-      int a = path[j].first, b = path[j].second;
-      g[a].push_back(b);
-      g[b].push_back(a);
+  rep(i, m) {
+    UnionFind uf(n);
+    rep(j, m) {
+      if (i == j) continue;
+      uf.unite(e[j].first, e[j].second);
     }
-    visited.assign(n, false);
-    dfs(g, 0);
-    bool flag = true;
-    rep(i, n) if (visited[i] == false) { flag = false; }
-    if (flag) ans++;
+    if (uf.size(0) != n) ans++;
   }
 
-  cout << m - ans << endl;
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

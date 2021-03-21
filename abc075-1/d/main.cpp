@@ -12,41 +12,11 @@ const double PI = acos(-1);
 #define no "No"
 #define all(n) n.begin(), n.end()
 
-template <class T>
-void chmin(T &a, T b) {
-  if (a > b) a = b;
-}
-template <class T>
-void chmax(T &a, T b) {
-  if (a < b) a = b;
-}
-
-struct UnionFind {
-  vector<int> par, siz;
-  UnionFind(int n) : par(n, -1), siz(n, 1) {}
-  int root(int x) {
-    if (par[x] == -1) return x;
-    return par[x] = root(par[x]);
-  }
-  bool isSame(int x, int y) { return root(x) == root(y); }
-  bool unite(int x, int y) {
-    x = root(x), y = root(y);
-    if (x == y) return false;
-    if (siz[x] < siz[y]) swap(x, y);
-    par[y] = x;
-    siz[x] += siz[y];
-    return true;
-  }
-  int size(int x) { return siz[root(x)]; }
-};
-
 using Graph = vector<vector<int>>;
 vector<int> visited(false);
 
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
-// const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
-// const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
 
 void dfs(const Graph &G, int v) {
   visited[v] = true;

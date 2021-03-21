@@ -111,5 +111,11 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  string a, b;
+  cin >> a >> b;
+  string x = "", y = "";
+  rep(i, stoi(b)) x += a;
+  rep(i, stoi(a)) y += b;
+  cout << min(x, y) << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

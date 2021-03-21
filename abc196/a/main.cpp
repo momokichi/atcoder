@@ -111,5 +111,8 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int a, b, c, d;
+  cin >> a >> b >> c >> d;
+  cout << max(a, b) - min(c, d) << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

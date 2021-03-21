@@ -111,5 +111,14 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  string x;
+  cin >> x;
+  rep(i, x.length()) {
+    if (x[i] == '.') {
+      cout << endl;
+      return 0;
+    }
+    cout << x[i];
+  }
   // cout << fixed << setprecision(9) << ans << endl;
 }
