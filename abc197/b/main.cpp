@@ -109,19 +109,42 @@ vector<int> eratosthenes(int n) {
   }
   return p;
 }
+int h, w, x, y;
 
 int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
-  rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
-    }
+  cin >> h >> w >> x >> y;
+  x--, y--;
+  vector<string> grid(h);
+  rep(i, h) { cin >> grid[i]; }
+
+  int ans = 0;
+
+  for (int j = y - 1; j >= 0; --j) {
+    if (grid[x][j] == '.')
+      ans++;
+    else
+      break;
   }
+  for (int j = y + 1; j < w; ++j) {
+    if (grid[x][j] == '.')
+      ans++;
+    else
+      break;
+  }
+
+  for (int i = x - 1; i >= 0; --i) {
+    if (grid[i][y] == '.')
+      ans++;
+    else
+      break;
+  }
+  for (int i = x + 1; i < h; ++i) {
+    if (grid[i][y] == '.')
+      ans++;
+    else
+      break;
+  }
+  ans++;
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

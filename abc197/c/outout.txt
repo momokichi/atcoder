@@ -1,0 +1,22 @@
+[WARNING] update available for online-judge-tools: 11.1.0 -> 11.1.4
+[INFO] run: $ pip3 install -U online-judge-tools
+[WARNING] update available for online-judge-api-client: 10.5.0 -> 10.8.0
+[INFO] run: $ pip3 install -U online-judge-api-client
+[INFO] online-judge-tools 11.1.0 (+ online-judge-api-client 10.5.0)
+[INFO] 3 cases found
+
+[INFO] sample-1
+[INFO] time: 0.002810 sec
+[SUCCESS] AC
+
+[INFO] sample-2
+[INFO] time: 0.002646 sec
+[SUCCESS] AC
+
+[INFO] sample-3
+[INFO] time: 0.002808 sec
+[SUCCESS] AC
+
+[INFO] slowest: 0.002810 sec  (for sample-1)
+[INFO] max memory: 3.468000 MB  (for sample-3)
+[SUCCESS] test success: 3 cases

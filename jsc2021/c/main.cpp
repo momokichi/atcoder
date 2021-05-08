@@ -64,7 +64,7 @@ bool isPrime(ll n) {
 }
 
 // 最大公約数
-ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
+int gcd(int a, int b) { return b ? gcd(b, a % b) : a; }
 
 // 最小公倍数
 ll lcm(ll a, ll b) { return abs(a) / gcd(a, b) * abs(b); }
@@ -81,9 +81,9 @@ ll lcm2(const vector<ll> &v) {
   return val;
 }
 
-vector<ll> divisors(ll n) {
-  vector<ll> a;
-  for (ll i = 1; i * i <= n; i++) {
+vector<int> divisors(int n) {
+  vector<int> a;
+  for (int i = 1; i * i <= n; i++) {
     if (n % i == 0) {
       a.push_back(i);
       if (n / i != i) a.push_back(n / i);
@@ -93,35 +93,17 @@ vector<ll> divisors(ll n) {
   return a;
 }
 
-// pairを要素に持つvectorをsecondを基準にソートする比較関数
-bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
-
-vector<int> eratosthenes(int n) {
-  vector<bool> is_prime(n + 1, true);
-  vector<int> p;
-  for (int i = 2; i <= n; ++i) {
-    if (is_prime[i]) {
-      for (int j = i * 2; j <= n; j += i) {
-        is_prime[j] = false;
-      }
-      p.push_back(i);
-    }
-  }
-  return p;
-}
-
 int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
-  rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
+  int a, b;
+  cin >> a >> b;
+  int ans = 0;
+
+  for (int i = 1; i <= b - a; ++i) {
+    for (int j = 1; j < 200000 + 10; j++) {
+      if (i * j >= a && i * (j + 1) <= b) ans = max(ans, i);
+      if (i * (j + 1) > b) break;
     }
   }
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

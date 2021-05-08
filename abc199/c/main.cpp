@@ -111,17 +111,42 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+  int q;
+  cin >> q;
+  vector<int> t(q), a(q), b(q);
+  rep(i, q) { cin >> t[i] >> a[i] >> b[i]; }
+
+  rep(i, q - 1) {
+    if (t[i] == 2 && t[i + 1] == 2) t[i] = 3, t[i + 1] = 3;
+  }
+
   rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
+    if (t[i] == 1) {
+      swap(s[a[i] - 1], s[b[i] - 1]);
+    } else if (t[i] == 2) {
+      s = s.substr(n) + s.substr(0, n);
+    } else if (t[i] == 3) {
+      continue;
     }
   }
+
+  // int prev = 0;
+  // while (q--) {
+  //   int t, a, b;
+  //   cin >> t >> a >> b;
+  //   if (t == 1) {
+  //     swap(s[a - 1], s[b - 1]);
+  //   } else if () {
+  //     continue;
+  //   } else if(prev == 2 && t == 2){
+  //   }
+  //   prev = t;
+  // }
+
+  cout << s << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

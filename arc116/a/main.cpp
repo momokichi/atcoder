@@ -96,12 +96,12 @@ vector<ll> divisors(ll n) {
 // pairを要素に持つvectorをsecondを基準にソートする比較関数
 bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
 
-vector<int> eratosthenes(int n) {
+vector<ll> eratosthenes(ll n) {
   vector<bool> is_prime(n + 1, true);
-  vector<int> p;
-  for (int i = 2; i <= n; ++i) {
+  vector<ll> p;
+  for (ll i = 2; i <= n; ++i) {
     if (is_prime[i]) {
-      for (int j = i * 2; j <= n; j += i) {
+      for (ll j = i * 2; j <= n; j += i) {
         is_prime[j] = false;
       }
       p.push_back(i);
@@ -111,17 +111,15 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
-  rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
-    }
+  int t;
+  cin >> t;
+  vector<ll> e = eratosthenes(20);
+  for (auto x : e) {
+    cout << x << endl;
+  }
+  while (t--) {
+    ll n;
+    cin >> n;
   }
   // cout << fixed << setprecision(9) << ans << endl;
 }

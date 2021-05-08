@@ -110,18 +110,38 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
-int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
-  rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
-    }
+ll calc(vector<ll> v) {
+  ll ret = 0;
+  for (auto x : v) {
+    ret ^= x;
   }
+  return ret;
+}
+
+int main() {
+  int n;
+  cin >> n;
+  vector<ll> a(n);
+  rep(i, n) cin >> a[i];
+  ll ans = llinf;
+  for (int bit = 0; bit < (1 << (n - 1)); ++bit) {
+    vector<ll> v;
+    ll b = a[0];
+    for (int i = 0; i < n; ++i) {
+      if (bit & (1 << i)) {
+        // cout << i << endl;
+        v.push_back(b | a[i]);
+        b = 0;
+      } else {
+        b |= a[i];
+      }
+    }
+    v.push_back(b);
+    // for (auto x : v) cout << bitset<30>(x) << endl;
+    ans = min(ans, calc(v));
+    // cout << endl;
+  }
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

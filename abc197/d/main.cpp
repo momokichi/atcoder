@@ -110,18 +110,36 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
+struct Point {
+  double x;
+  double y;
+};
+
 int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
-  rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
-    }
-  }
+  double n;
+  cin >> n;
+
+  Point p0, pk;
+  cin >> p0.x >> p0.y >> pk.x >> pk.y;
+
+  Point center;
+  center.x = (p0.x + pk.x) / 2;
+  center.y = (p0.y + pk.y) / 2;
+
+  // cout << center.x << " " << center.y << endl;
+
+  Point ans;
+
+  double theta = 360 / n;
+  // cout << theta << endl;
+
+  ans.x = ((p0.x - center.x) * cos(theta)) - ((p0.y - center.y) * sin(theta)) +
+          center.x;
+
+  ans.y = ((p0.x - center.x) * sin(theta)) + ((p0.y - center.y) * cos(theta)) +
+          center.y;
+
+  cout << ans.x << " " << ans.y << endl;
+
   // cout << fixed << setprecision(9) << ans << endl;
 }

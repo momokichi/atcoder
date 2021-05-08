@@ -111,17 +111,9 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf = UnionFind(n);
-  rep(i, q) {
-    int p, a, b;
-    cin >> p >> a >> b;
-    if (p == 0) {
-      uf.unite(a--, b--);
-    } else if (p == 1) {
-      cout << (uf.isSame(a--, b--) ? yes : no) << endl;
-    }
-  }
+  double x, y, z;
+  cin >> x >> y >> z;
+  double ans = y * z / x;
+  cout << ceil(ans) - 1 << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }
