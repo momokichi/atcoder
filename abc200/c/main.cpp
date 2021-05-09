@@ -111,17 +111,24 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
-  ll n;
+  int n;
   cin >> n;
-  ll a, b, c;
-  cin >> a >> b >> c;
-  ll ans = llinf;
-  for (ll i = 0; i < 10005; ++i) {
-    for (ll j = 0; j < 10005 - i; j++) {
-      ll m = n - (a * i) - (b * j);
-      if (m >= 0 && m % c == 0) ans = min(ans, i + j + (m / c));
+  map<ll, vector<ll>> v;
+  rep(i, n) {
+    ll a;
+    cin >> a;
+    v[a % 100].push_back(a);
+  }
+  ll ans = 0;
+
+  for (auto itr = v.begin(); itr != v.end(); ++itr) {
+    for (int i = 0; i < itr->second.size(); ++i) {
+      for (int j = i + 1; j < itr->second.size(); ++j) {
+        if ((itr->second[i] - itr->second[j]) % 200 == 0) ans++;
+      }
     }
   }
+
   cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

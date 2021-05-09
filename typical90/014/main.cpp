@@ -111,5 +111,16 @@ vector<int> eratosthenes(int n) {
 }
 
 int main() {
+  int n;
+  cin >> n;
+  vector<ll> a(n), b(n);
+  rep(i, n) cin >> a[i];
+  rep(i, n) cin >> b[i];
+  sort(all(a)), sort(all(b));
+  ll ans = 0;
+
+  rep(i, n) ans += abs(a[i] - b[i]);
+
+  cout << ans << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

@@ -110,6 +110,49 @@ vector<int> eratosthenes(int n) {
   return p;
 }
 
+ll n, l, k;
+vector<ll> a;
+
+bool f(ll key) {
+  ll count = 0, len = 0, prev = 0;
+  for (int i = 0; i < n; ++i) {
+    len = a[i] - prev;
+    // cout << len << endl;
+
+    if (len < key)
+      len = a[i] - prev;
+    else {
+      prev = a[i];
+      count++;
+      len = 0;
+    }
+  }
+  len = l - prev;
+  if (len >= key) count++;
+  // cout << len << endl;
+  // cout << "count: " << count << endl;
+
+  if (count >= k + 1)
+    return true;
+  else {
+    return false;
+  }
+}
+
 int main() {
+  cin >> n >> l >> k;
+  a.assign(n, 0);
+  rep(i, n) cin >> a[i];
+  ll left = 0, right = l;
+
+  while (right - left > 1) {
+    ll mid = left + (right - left) / 2;
+    // cout << "mid = " << mid << endl;
+    if (f(mid))
+      left = mid;
+    else
+      right = mid;
+  }
+  cout << left << endl;
   // cout << fixed << setprecision(9) << ans << endl;
 }

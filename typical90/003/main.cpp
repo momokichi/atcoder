@@ -41,75 +41,40 @@ struct UnionFind {
 };
 
 using Graph = vector<vector<int>>;
-vector<int> visited(false);
+vector<int> visited;
 
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
-// const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
-// const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-
-void dfs(const Graph &G, int v) {
-  visited[v] = true;
+void dfs(const Graph &G, int v, int depth) {
+  visited[v] = min(visited[v], depth);
   for (auto next : G[v]) {
-    if (visited[next]) continue;
-    dfs(G, next);
+    if (visited[next] != inf) continue;
+    dfs(G, next, depth + 1);
   }
-}
-
-bool isPrime(ll n) {
-  if (n < 2) return false;
-  for (ll i = 2; i * i <= n; ++i)
-    if (n % i == 0) return false;
-  return true;
-}
-
-// 最大公約数
-ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
-
-// 最小公倍数
-ll lcm(ll a, ll b) { return abs(a) / gcd(a, b) * abs(b); }
-
-ll gcd2(const vector<ll> &v) {
-  ll val = v[0];
-  for (ll i = 1; i < v.size(); ++i) val = gcd(val, v[i]);
-  return val;
-}
-
-ll lcm2(const vector<ll> &v) {
-  ll val = v[0];
-  for (ll i = 1; i < v.size(); ++i) val = lcm(val, v[i]);
-  return val;
-}
-
-vector<ll> divisors(ll n) {
-  vector<ll> a;
-  for (ll i = 1; i * i <= n; i++) {
-    if (n % i == 0) {
-      a.push_back(i);
-      if (n / i != i) a.push_back(n / i);
-    }
-  }
-  sort(a.begin(), a.end());
-  return a;
-}
-
-// pairを要素に持つvectorをsecondを基準にソートする比較関数
-bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
-
-vector<int> eratosthenes(int n) {
-  vector<bool> is_prime(n + 1, true);
-  vector<int> p;
-  for (int i = 2; i <= n; ++i) {
-    if (is_prime[i]) {
-      for (int j = i * 2; j <= n; j += i) {
-        is_prime[j] = false;
-      }
-      p.push_back(i);
-    }
-  }
-  return p;
 }
 
 int main() {
+  int n;
+  cin >> n;
+  Graph g(n);
+  rep(i, n - 1) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
+    g[a].push_back(b);
+    g[b].push_back(a);
+  }
+
+  visited.assign(n, inf);
+  dfs(g, 0, 0);
+
+  auto itr = max_element(all(visited));
+  int index = distance(visited.begin(), itr);
+
+  visited.assign(n, inf);
+  dfs(g, index, 0);
+
+  auto ans = max_element(all(visited));
+
+  cout << *ans + 1 << endl;
+
   // cout << fixed << setprecision(9) << ans << endl;
 }

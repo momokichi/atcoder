@@ -41,75 +41,56 @@ struct UnionFind {
 };
 
 using Graph = vector<vector<int>>;
-vector<int> visited(false);
 
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
-// const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
-// const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
 
-void dfs(const Graph &G, int v) {
-  visited[v] = true;
-  for (auto next : G[v]) {
-    if (visited[next]) continue;
-    dfs(G, next);
+int h, w;
+
+bool g[2002][2002];
+vector<vector<bool>> visited;
+
+int ra, ca, rb, cb;
+
+void dfs(int x, int y) {
+  if (x < 0 || y < 0 || x >= h || y >= w) return;
+  if (g[x][y] == false) return;
+  if (visited[x][y]) return;
+  if (g[x][y] == false) return;
+
+  visited[x][y] = true;  // 現在地を訪問済みにする
+  if (x == rb && y == cb) return;
+
+  for (int direction = 0; direction < 4; ++direction) {
+    dfs(x + dx[direction], y + dy[direction]);
   }
-}
-
-bool isPrime(ll n) {
-  if (n < 2) return false;
-  for (ll i = 2; i * i <= n; ++i)
-    if (n % i == 0) return false;
-  return true;
-}
-
-// 最大公約数
-ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
-
-// 最小公倍数
-ll lcm(ll a, ll b) { return abs(a) / gcd(a, b) * abs(b); }
-
-ll gcd2(const vector<ll> &v) {
-  ll val = v[0];
-  for (ll i = 1; i < v.size(); ++i) val = gcd(val, v[i]);
-  return val;
-}
-
-ll lcm2(const vector<ll> &v) {
-  ll val = v[0];
-  for (ll i = 1; i < v.size(); ++i) val = lcm(val, v[i]);
-  return val;
-}
-
-vector<ll> divisors(ll n) {
-  vector<ll> a;
-  for (ll i = 1; i * i <= n; i++) {
-    if (n % i == 0) {
-      a.push_back(i);
-      if (n / i != i) a.push_back(n / i);
-    }
-  }
-  sort(a.begin(), a.end());
-  return a;
-}
-
-// pairを要素に持つvectorをsecondを基準にソートする比較関数
-bool comp(pair<ll, ll> a, pair<ll, ll> b) { return a.second < b.second; }
-
-vector<int> eratosthenes(int n) {
-  vector<bool> is_prime(n + 1, true);
-  vector<int> p;
-  for (int i = 2; i <= n; ++i) {
-    if (is_prime[i]) {
-      for (int j = i * 2; j <= n; j += i) {
-        is_prime[j] = false;
-      }
-      p.push_back(i);
-    }
-  }
-  return p;
 }
 
 int main() {
+  cin >> h >> w;
+  ll q;
+  cin >> q;
+  while (q--) {
+    int t;
+    cin >> t;
+    if (t == 1) {
+      int r, c;
+      cin >> r >> c;
+      r--, c--;
+      g[r][c] = true;
+    } else if (t == 2) {
+      cin >> ra >> ca >> rb >> cb;
+      ra--, ca--, rb--, cb--;
+      bool f1 = g[ra][ca] && g[rb][cb];
+      visited.assign(2002, vector<bool>(2002, false));
+      dfs(ra, ca);
+      bool f2 = visited[rb][cb];
+
+      if (f1 && f2)
+        cout << yes << endl;
+      else
+        cout << no << endl;
+    }
+  }
   // cout << fixed << setprecision(9) << ans << endl;
 }
